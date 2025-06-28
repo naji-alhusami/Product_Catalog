@@ -23,9 +23,9 @@ export async function getToken(): Promise<TokenResponse | null> {
       headers,
     });
 
-    const { access_token } = response.data;
+    const token = response.data;
 
-    return access_token;
+    return token;
   } catch (error) {
     const axiosError = error as AxiosError;
 
