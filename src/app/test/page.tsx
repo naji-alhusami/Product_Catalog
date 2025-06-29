@@ -1,19 +1,23 @@
-import { getBrands } from "@/components/lib/getBrands";
+import { getAllKeys } from "@/components/lib/getAllKeys";
+import Image from "next/image";
 
 export default async function HomePage() {
-  const brands = await getBrands();
+  const keys = await getAllKeys();
   return (
     <div>
       <h1>Vehicle Brands</h1>
-      {brands ? (
+      {/* {keys ? (
         <ul>
-          {brands.map((brand) => (
-            <li key={brand.id}>{brand.name}</li>
+          {keys.map((key) => (
+            <div key={key.id}>
+              <li>{key.keyForm.imageUrl}</li>
+              <Image src={key.keyForm.imageUrl} alt="key-image" width={200} height={200} />
+            </div>
           ))}
         </ul>
       ) : (
         <p>Failed to load brands.</p>
-      )}
+      )} */}
     </div>
   );
 }
