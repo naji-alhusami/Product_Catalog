@@ -1,13 +1,15 @@
 import Keys from "@/components/Keys/Keys";
 import Navbar from "@/components/layout/Navbar/BasicNavbar";
+import { getBrands } from "@/components/lib/getBrands";
 
-const Keyfobs = () => {
+async function Keyfobs() {
+  const brands = await getBrands();
   return (
     <div>
       <Navbar />
-      <Keys />
+      {brands && <Keys brands={brands} />}
     </div>
   );
-};
+}
 
 export default Keyfobs;

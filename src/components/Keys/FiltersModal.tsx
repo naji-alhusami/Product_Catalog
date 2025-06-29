@@ -2,17 +2,21 @@ import Modal from "../ui/Modal";
 import { CircleAlert, XCircle } from "lucide-react";
 
 import Backdrop from "../ui/Backdrop";
+import { useState } from "react";
+import BrandsFilter from "./BrandsFilter";
 
 type FiltersModalProps = {
   isFiltersModal: boolean;
   setIsFiltersModal: React.Dispatch<React.SetStateAction<boolean>>;
   showFiltersModalHandler: () => void;
+  brands: string[];
 };
 
 const FiltersModal = ({
   isFiltersModal,
   setIsFiltersModal,
   showFiltersModalHandler,
+  brands,
 }: FiltersModalProps) => {
   //   const contextValue = useContext(StateContext) as {
   //     isNotLoginModal: boolean;
@@ -33,10 +37,7 @@ const FiltersModal = ({
         className="text-cyan-500 h-8 w-8 self-end hover:bg-cyan-200 hover:rounded-full cursor-pointer"
       />
       <h1 className="font-bold text-2xl pb-4 text-center">Filters</h1>
-      {/* <CircleAlert className="text-rose-800 h-12 w-12 self-center my-6" /> */}
-      <h1 className="text-md text-center my-6">
-        You Should Login in Order to Add Meals to Basket
-      </h1>
+      <BrandsFilter brands={brands} />
       <div className="flex flex-row justify-end items-center gap-x-8">
         <button
           type="button"

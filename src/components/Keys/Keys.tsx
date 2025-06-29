@@ -5,7 +5,11 @@ import FiltersSidebar from "./FiltersSidebar";
 import KeysHeader from "./KeysHeader";
 import Sort from "./Sort";
 
-const Keys = () => {
+type KeysProps = {
+  brands: string[];
+};
+
+const Keys = ({ brands }: KeysProps) => {
   const [isFiltersModal, setIsFiltersModal] = useState<boolean>(false);
 
   function showFiltersModalHandler() {
@@ -19,10 +23,11 @@ const Keys = () => {
           isFiltersModal={isFiltersModal}
           setIsFiltersModal={setIsFiltersModal}
           showFiltersModalHandler={showFiltersModalHandler}
+          brands={brands}
         />
       )}
       <div className="h-screen flex flex-row">
-        <FiltersSidebar />
+        <FiltersSidebar brands={brands} />
         <div className="flex flex-col px-8 py-20 sm:px-16">
           <KeysHeader />
           {/* Filters Row */}

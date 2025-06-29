@@ -2,7 +2,6 @@ import { getBrands } from "@/components/lib/getBrands";
 
 export default async function HomePage() {
   const brands = await getBrands();
-  console.log(brands);
   return (
     <div>
       <h1>Vehicle Brands</h1>
