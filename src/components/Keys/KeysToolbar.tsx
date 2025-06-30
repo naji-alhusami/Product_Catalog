@@ -1,12 +1,19 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MoveDown, MoveUp, SlidersHorizontal } from "lucide-react";
+import SelectedFiltersBar from "./SelectedFiltersBar";
 
-type SortProps = {
+type KeysToolbarProps = {
   showFiltersModalHandler: () => void;
+  selectedBrands: string[];
+  setSelectedBrands: (brands: string[]) => void;
 };
 
-const Sort = ({ showFiltersModalHandler }: SortProps) => {
+const KeysToolbar = ({
+  showFiltersModalHandler,
+  selectedBrands,
+  setSelectedBrands,
+}: KeysToolbarProps) => {
   const filterOptions = ["By Datea", "By Rated", "By Date"];
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>("All");
@@ -14,21 +21,32 @@ const Sort = ({ showFiltersModalHandler }: SortProps) => {
   const handleSelect = (option: string) => {
     setSelected(option);
     setIsOpen(false);
-    // onSelect(option);
   };
-
+  console.log(selectedBrands);
   return (
-    <div className="flex flex-row justify-between items-center">
-      <div className="flex justify-start items-center pt-10 pb-4 lg:hidden">
+    <div className="w-full flex flex-row justify-between items-center">
+      <div className="flex justify-start items-center lg:hidden">
         <button
           onClick={showFiltersModalHandler}
-          className="flex items-center gap-2 px-4 py-2 font-bold text-black border-1 border-black hover:bg-gray-200 hover:text-cyan-500 hover:border-cyan-500 cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2 border border-blue-600 text-blue-600 font-medium hover:bg-blue-50 text-sm"
         >
-          <SlidersHorizontal /> Filters
+          <span className="flex items-center gap-1">
+            Filters {selectedBrands.length > 0 && `(${selectedBrands.length})`}
+          </span>
+          <SlidersHorizontal className="w-4 h-4" />
         </button>
       </div>
+      <div className="hidden lg:flex">
+        <SelectedFiltersBar
+          selectedBrands={selectedBrands}
+          onRemoveBrand={(brand) =>
+            setSelectedBrands(selectedBrands.filter((b) => b !== brand))
+          }
+          onClearAll={() => setSelectedBrands([])}
+        />
+      </div>
       {/* Dropdown Button */}
-      <div className="relative text-left pt-10 pb-4 w-50 lg:w-70 flex flex-row justify-center items-center">
+      <div className="relative text-right w-50 lg:w-60 flex flex-row justify-center items-center gap-x-6">
         <h1 className="font-semibold w-35">Sort By:</h1>
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -64,8 +82,8 @@ const Sort = ({ showFiltersModalHandler }: SortProps) => {
 
         {/* Dropdown Menu */}
         {isOpen && (
-          <div className="absolute top-18 left-19 lg:left-22 z-10 mt-2 w-32 lg:w-48 rounded-xl bg-white shadow-lg border-1 border-gray-200 ring-opacity-5 ">
-            <ul className="py-2">
+          <div className="absolute top-18 left-19 lg:left-24 z-10 mt-2 w-32 lg:w-36 rounded-xl bg-white shadow-lg border-1 border-gray-200 ring-opacity-5 ">
+            <ul className="py-2 text-left">
               {filterOptions.map((option) => (
                 <li
                   key={option}
@@ -88,4 +106,4 @@ const Sort = ({ showFiltersModalHandler }: SortProps) => {
   );
 };
 
-export default Sort;
+export default KeysToolbar;

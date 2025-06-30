@@ -1,9 +1,7 @@
-import Modal from "../ui/Modal";
-import { CircleAlert, XCircle } from "lucide-react";
+import { XCircle } from "lucide-react";
 
+import Modal from "../ui/Modal";
 import Backdrop from "../ui/Backdrop";
-import { useState } from "react";
-import BrandsFilter from "./BrandsFilter";
 
 type FiltersModalProps = {
   isFiltersModal: boolean;
@@ -16,14 +14,7 @@ const FiltersModal = ({
   isFiltersModal,
   setIsFiltersModal,
   showFiltersModalHandler,
-  brands,
 }: FiltersModalProps) => {
-  //   const contextValue = useContext(StateContext) as {
-  //     isNotLoginModal: boolean;
-  //     setIsNotLoginModal: (notLogin: boolean) => void;
-  //   };
-  //   const { isNotLoginModal, setIsNotLoginModal } = contextValue;
-
   function closeFiltersModalHandler() {
     setIsFiltersModal(false);
   }
@@ -37,7 +28,6 @@ const FiltersModal = ({
         className="text-cyan-500 h-8 w-8 self-end hover:bg-cyan-200 hover:rounded-full cursor-pointer"
       />
       <h1 className="font-bold text-2xl pb-4 text-center">Filters</h1>
-      <BrandsFilter brands={brands} />
       <div className="flex flex-row justify-end items-center gap-x-8">
         <button
           type="button"

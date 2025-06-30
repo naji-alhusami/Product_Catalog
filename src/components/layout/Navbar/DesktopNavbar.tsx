@@ -6,7 +6,7 @@ import Logo from "@/Images/test.png";
 
 const DesktopNavbar = () => {
   return (
-    <div className="hidden md:w-full md:h-16 md:flex flex-row justify-between items-center bg-white shadow-2xl md:px-16 border-b-1 border-cyan-300">
+    <div className="hidden md:w-full md:h-16 md:flex flex-row justify-between items-center bg-white shadow-2xl lg:px-36 border-b-1 border-cyan-300">
       <Image src={Logo} alt="logo" width={250} height={250} />
       <nav className="flex flex-row justify-center items-center text-xl font-bold gap-x-12">
         <Link

@@ -1,29 +1,20 @@
-import AllKeys from "@/components/Keys/AllKeys";
-import Filters from "@/components/Keys/Filters";
-import FiltersSidebar from "@/components/Keys/FiltersSidebar";
+// import AllKeys from "@/components/Keys/AllKeys";
+import Keys from "@/components/Keys/Keys";
+// import FiltersSidebar from "@/components/Keys/FiltersSidebar";
 import Navbar from "@/components/layout/Navbar/BasicNavbar";
 import { getAllKeys } from "@/components/lib/getAllKeys";
 import { getBrands } from "@/components/lib/getBrands";
 
-async function Keyfobs() {
+async function KeyfobsPage() {
   const brands = await getBrands();
-  let allKeys: any[] = [];
-
-  try {
-    allKeys = await getAllKeys();
-  } catch (err) {
-    console.error("Failed to fetch keys:", err);
-  }
+  const allKeys = await getAllKeys();
 
   return (
     <div>
       <Navbar />
-      <div className="h-screen flex flex-row">
-        {brands && <FiltersSidebar brands={brands} />}
-        {brands && allKeys && <Filters brands={brands} allKeys={allKeys} />}
-      </div>
+      {brands && allKeys && <Keys brands={brands} allKeys={allKeys} />}
     </div>
   );
 }
 
-export default Keyfobs;
+export default KeyfobsPage;
