@@ -1,8 +1,14 @@
+// import { getAllKeys } from "@/components/lib/getAllKeys";
 import { getAllKeys } from "@/components/lib/getAllKeys";
-import Image from "next/image";
+// import { getBrands } from "@/components/lib/getBrands";
+// import { getKeysByBrand } from "@/components/lib/getKeysByBrand";
+// import Image from "next/image";
 
 export default async function HomePage() {
-  const keys = await getAllKeys();
+  // const keys = await getAllKeys();
+  // const keys = await getKeysByBrand("Honda");
+  // const brands = await getBrands();
+  const allKeys = await getAllKeys();
   return (
     <div>
       <h1>Vehicle Brands</h1>

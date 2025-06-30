@@ -1,15 +1,17 @@
 "use client";
 import { useState } from "react";
 import FiltersModal from "./FiltersModal";
-import FiltersSidebar from "./FiltersSidebar";
 import KeysHeader from "./KeysHeader";
 import Sort from "./Sort";
+import AllKeys from "./AllKeys";
+import { type Key } from "../lib/getAllKeys";
 
-type KeysProps = {
+type FiltersProps = {
   brands: string[];
+  allKeys: Key[];
 };
 
-const Keys = ({ brands }: KeysProps) => {
+const Filters = ({ brands, allKeys }: FiltersProps) => {
   const [isFiltersModal, setIsFiltersModal] = useState<boolean>(false);
 
   function showFiltersModalHandler() {
@@ -26,20 +28,21 @@ const Keys = ({ brands }: KeysProps) => {
           brands={brands}
         />
       )}
-      <div className="h-screen flex flex-row">
-        <FiltersSidebar brands={brands} />
-        <div className="flex flex-col px-8 py-20 sm:px-16">
+      <div className="flex flex-row">
+        {/* <FiltersSidebar brands={brands} /> */}
+        <div className="flex flex-col px-12 py-20 sm:px-16">
           <KeysHeader />
           {/* Filters Row */}
+          <div className=" h-1 w-full mt-1 bg-gray-500" />
           <Sort showFiltersModalHandler={showFiltersModalHandler} />
-          <div className=" h-px w-full mt-1 bg-gray-500" />
+          {allKeys && <AllKeys allKeys={allKeys} />}
         </div>
       </div>
     </>
   );
 };
 
-export default Keys;
+export default Filters;
 
 {
   /* Category Tabs */

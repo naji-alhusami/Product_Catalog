@@ -9,8 +9,8 @@ type BrandFilterProps = {
 const BrandsFilter = ({ brands }: BrandFilterProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const maxVisible = 5;
-
-  const visibleBrands = isExpanded ? brands : brands.slice(0, maxVisible);
+  const cleanedBrands = brands.map((b) => b.trim());
+  const visibleBrands = isExpanded ? cleanedBrands : cleanedBrands.slice(0, maxVisible);
 
   return (
     <div className="py-6 px-12">
