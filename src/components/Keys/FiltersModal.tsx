@@ -7,7 +7,7 @@ type FiltersModalProps = {
   isFiltersModal: boolean;
   setIsFiltersModal: React.Dispatch<React.SetStateAction<boolean>>;
   showFiltersModalHandler: () => void;
-  brands: string[];
+  // brands: string[];
 };
 
 const FiltersModal = ({

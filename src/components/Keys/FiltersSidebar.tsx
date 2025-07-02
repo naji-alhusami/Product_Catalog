@@ -1,26 +1,16 @@
+import { getBrands } from "../lib/getBrands";
 import BrandsFilter from "./BrandsFilter";
 
 type FiltersSidebarProps = {
-  brands: string[];
-  selectedBrands: string[];
-  setSelectedBrands: (brands: string[]) => void;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-const FiltersSidebar = ({
-  brands,
-  selectedBrands,
-  setSelectedBrands,
-}: FiltersSidebarProps) => {
-  return (
-    <div className="hidden lg:flex flex-col w-80 pr-16 py-32">
-      <h1 className="text-2xl font-semibold">Filters</h1>
-      <BrandsFilter
-        brands={brands}
-        selectedBrands={selectedBrands}
-        setSelectedBrands={setSelectedBrands}
-      />
-    </div>
-  );
-};
+export default async function FiltersSidebar({
+  searchParams,
+}: FiltersSidebarProps) {
+  const brands = await getBrands();
 
-export default FiltersSidebar;
+  if (brands) {
+    return <BrandsFilter brands={brands} searchParams={searchParams} />;
+  }
+}

@@ -4,9 +4,10 @@ import { type Key } from "../lib/getAllKeys";
 
 type allKeysProps = {
   allKeys: Key[];
+  brands: { [key: string]: string | string[] | undefined };
 };
 
-const AllKeys = ({ allKeys }: allKeysProps) => {
+const AllKeys = ({ allKeys, brands }: allKeysProps) => {
   return (
     <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-16">
       {allKeys.map((key) => (

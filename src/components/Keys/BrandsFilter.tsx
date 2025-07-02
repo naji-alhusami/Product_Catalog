@@ -1,18 +1,21 @@
 "use client";
-
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { use, useState } from "react";
 
 type BrandFilterProps = {
   brands: string[];
-  selectedBrands: string[];
-  setSelectedBrands: (brands: string[]) => void;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-const BrandsFilter = ({
-  brands,
-  selectedBrands,
-  setSelectedBrands,
-}: BrandFilterProps) => {
+const BrandsFilter = ({ brands, searchParams }: BrandFilterProps) => {
+  const router = useRouter();
+  const query = use(searchParams);
+  const selectedBrands: string[] = Array.isArray(query.brand)
+    ? query.brand.map((b) => b.trim())
+    : query.brand
+    ? [query.brand.trim()]
+    : [];
+
   const [isExpanded, setIsExpanded] = useState(false);
   const maxVisible = 5;
   const cleanedBrands = brands.map((b) => b.trim());
@@ -20,12 +23,18 @@ const BrandsFilter = ({
     ? cleanedBrands
     : cleanedBrands.slice(0, maxVisible);
 
-  const toggleBrand = (brand: string) => {
-    if (selectedBrands.includes(brand)) {
-      setSelectedBrands(selectedBrands.filter((b) => b !== brand));
+  const handleToggleBrand = (brand: string) => {
+    const params = new URLSearchParams();
+    const current = new Set(selectedBrands);
+
+    if (current.has(brand)) {
+      current.delete(brand);
     } else {
-      setSelectedBrands([...selectedBrands, brand]);
+      current.add(brand);
     }
+
+    current.forEach((b) => params.append("brand", b));
+    router.push(`/keyfobs?${params.toString()}`);
   };
 
   return (
@@ -39,7 +48,7 @@ const BrandsFilter = ({
             name="brand"
             value={brand}
             checked={selectedBrands.includes(brand)}
-            onChange={() => toggleBrand(brand)}
+            onChange={() => handleToggleBrand(brand)}
             className="h-4 w-4"
           />
           <label htmlFor={brand} className="text-sm">

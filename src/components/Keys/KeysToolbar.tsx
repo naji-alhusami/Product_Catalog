@@ -2,17 +2,16 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MoveDown, MoveUp, SlidersHorizontal } from "lucide-react";
 import SelectedFiltersBar from "./SelectedFiltersBar";
+import { useRouter } from "next/navigation";
 
 type KeysToolbarProps = {
   showFiltersModalHandler: () => void;
   selectedBrands: string[];
-  setSelectedBrands: (brands: string[]) => void;
 };
 
 const KeysToolbar = ({
   showFiltersModalHandler,
   selectedBrands,
-  setSelectedBrands,
 }: KeysToolbarProps) => {
   const filterOptions = ["By Datea", "By Rated", "By Date"];
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -22,13 +21,30 @@ const KeysToolbar = ({
     setSelected(option);
     setIsOpen(false);
   };
-  console.log(selectedBrands);
+
+  const router = useRouter();
+
+  const handleRemoveBrand = (brandToRemove: string) => {
+    const updated = selectedBrands.filter((b) => b !== brandToRemove);
+    const params = new URLSearchParams();
+    updated.forEach((b) => params.append("brand", b));
+    router.push(`/keyfobs?${params.toString()}`);
+  };
+
+  const handleClearAll = () => {
+    router.push("/keyfobs");
+  };
+
   return (
     <div className="w-full flex flex-row justify-between items-center">
       <div className="flex justify-start items-center lg:hidden">
         <button
           onClick={showFiltersModalHandler}
-          className="flex items-center gap-2 px-4 py-2 border border-blue-600 text-blue-600 font-medium hover:bg-blue-50 text-sm"
+          className={`cursor-pointer flex items-center gap-2 px-4 py-2 border ${
+            selectedBrands.length > 0
+              ? "border-blue-600 text-blue-600"
+              : "border-black text-black"
+          } font-medium hover:bg-blue-50 text-sm`}
         >
           <span className="flex items-center gap-1">
             Filters {selectedBrands.length > 0 && `(${selectedBrands.length})`}
@@ -39,10 +55,8 @@ const KeysToolbar = ({
       <div className="hidden lg:flex">
         <SelectedFiltersBar
           selectedBrands={selectedBrands}
-          onRemoveBrand={(brand) =>
-            setSelectedBrands(selectedBrands.filter((b) => b !== brand))
-          }
-          onClearAll={() => setSelectedBrands([])}
+          onRemoveBrand={handleRemoveBrand}
+          onClearAll={handleClearAll}
         />
       </div>
       {/* Dropdown Button */}
@@ -82,7 +96,7 @@ const KeysToolbar = ({
 
         {/* Dropdown Menu */}
         {isOpen && (
-          <div className="absolute top-18 left-19 lg:left-24 z-10 mt-2 w-32 lg:w-36 rounded-xl bg-white shadow-lg border-1 border-gray-200 ring-opacity-5 ">
+          <div className="absolute top-8 left-19 lg:left-24 z-10 mt-2 w-32 lg:w-36 rounded-xl bg-white shadow-lg border-1 border-gray-200 ring-opacity-5 ">
             <ul className="py-2 text-left">
               {filterOptions.map((option) => (
                 <li
