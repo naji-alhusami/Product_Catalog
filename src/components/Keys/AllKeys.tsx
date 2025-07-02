@@ -4,7 +4,7 @@ import { type Key } from "../lib/getAllKeys";
 
 type allKeysProps = {
   allKeys: Key[];
-  brands: { [key: string]: string | string[] | undefined };
+  brands: string[];
 };
 
 const AllKeys = ({ allKeys, brands }: allKeysProps) => {

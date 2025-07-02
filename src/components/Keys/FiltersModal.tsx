@@ -2,19 +2,18 @@ import { XCircle } from "lucide-react";
 
 import Modal from "../ui/Modal";
 import Backdrop from "../ui/Backdrop";
+import { useContext } from "react";
+import StateContext from "@/app/store/state-context";
 
-type FiltersModalProps = {
-  isFiltersModal: boolean;
-  setIsFiltersModal: React.Dispatch<React.SetStateAction<boolean>>;
-  showFiltersModalHandler: () => void;
-  // brands: string[];
-};
+const FiltersModal = () => {
+  const contextValue = useContext(StateContext) as {
+    isFiltersModal: boolean;
+    setIsFiltersModal: (filtersModal: boolean) => void;
+    showFiltersModalHandler: () => void;
+  };
+  const { isFiltersModal, setIsFiltersModal, showFiltersModalHandler } =
+    contextValue;
 
-const FiltersModal = ({
-  isFiltersModal,
-  setIsFiltersModal,
-  showFiltersModalHandler,
-}: FiltersModalProps) => {
   function closeFiltersModalHandler() {
     setIsFiltersModal(false);
   }

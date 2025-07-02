@@ -13,7 +13,7 @@ export default async function KeyfobsPage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const brands = await searchParams;
+  // const brands = await searchParams;
 
   return (
     <div>
@@ -28,7 +28,9 @@ export default async function KeyfobsPage({
             </Suspense>
           </div>
           <Suspense fallback={<p>Loading keys...</p>}>
-            <KeysLoader brands={brands} />
+            <KeysLoader
+            //  brands={brands} 
+             />
           </Suspense>
         </div>
       </div>

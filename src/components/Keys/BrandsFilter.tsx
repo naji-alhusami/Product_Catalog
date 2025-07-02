@@ -34,7 +34,7 @@ const BrandsFilter = ({ brands, searchParams }: BrandFilterProps) => {
     }
 
     current.forEach((b) => params.append("brand", b));
-    router.push(`/keyfobs?${params.toString()}`);
+    router.push(`/keyfobs?${params.toString()}`, { scroll: false });
   };
 
   return (

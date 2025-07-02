@@ -1,18 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MoveDown, MoveUp, SlidersHorizontal } from "lucide-react";
 import SelectedFiltersBar from "./SelectedFiltersBar";
 import { useRouter } from "next/navigation";
+import StateContext from "@/app/store/state-context";
 
 type KeysToolbarProps = {
-  showFiltersModalHandler: () => void;
   selectedBrands: string[];
 };
 
-const KeysToolbar = ({
-  showFiltersModalHandler,
-  selectedBrands,
-}: KeysToolbarProps) => {
+const KeysToolbar = ({ selectedBrands }: KeysToolbarProps) => {
+  const contextValue = useContext(StateContext) as {
+    showFiltersModalHandler: () => void;
+  };
+  const { showFiltersModalHandler } = contextValue;
+  
   const filterOptions = ["By Datea", "By Rated", "By Date"];
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>("All");
