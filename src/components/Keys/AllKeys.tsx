@@ -13,8 +13,11 @@ const AllKeys = ({ allKeys }: allKeysProps) => {
       {allKeys.map((key) => (
         <div
           key={key.id}
-          className="border-1 border-gray-200 rounded-md p-2 w-full"
+          className="relative border-1 border-gray-200 rounded-md p-2 w-full"
         >
+          <p className="absolute text-lg border-1 border-black top-5 left-60 px-2 py-1 text-black bg-white rounded-lg font-bold">
+            {key.boxName.match(/\d+/)?.[0]}
+          </p>
           <Image
             src={key.keyForm.imageUrl}
             alt="key-image"
