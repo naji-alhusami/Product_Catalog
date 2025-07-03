@@ -7,7 +7,7 @@ type allKeysProps = {
   brands: string[];
 };
 
-const AllKeys = ({ allKeys, brands }: allKeysProps) => {
+const AllKeys = ({ allKeys }: allKeysProps) => {
   return (
     <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-16">
       {allKeys.map((key) => (

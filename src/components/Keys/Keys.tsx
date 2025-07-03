@@ -20,6 +20,10 @@ const Keys = ({ allKeys }: FiltersProps) => {
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
   const brandParam = searchParams.getAll("brand");
+  const typeParam = searchParams.getAll("type");
+  const classParam = searchParams.getAll("class");
+
+  console.log("typeParam:", typeParam);
 
   useEffect(() => {
     setLoading(true);
@@ -31,11 +35,27 @@ const Keys = ({ allKeys }: FiltersProps) => {
     return brandParam.map((b) => b.trim());
   }, [brandParam]);
 
+  const selectedTypes: string[] = useMemo(() => {
+    return typeParam.map((t) => t.trim());
+  }, [typeParam]);
+
+  const selectedClasses: string[] = useMemo(() => {
+    return classParam.map((c) => c.trim());
+  }, [classParam]);
+
   const filteredKeys = useMemo(() => {
-    return selectedBrands.length > 0
-      ? allKeys.filter((key) => selectedBrands.includes(key.brand.trim()))
-      : allKeys;
-  }, [selectedBrands, allKeys]);
+    return allKeys.filter((key) => {
+      const brandMatch =
+        selectedBrands.length === 0 ||
+        selectedBrands.includes(key.brand.trim());
+
+      const typeId = key.boxName.match(/\d+/)?.[0];
+      const typeMatch =
+        typeParam.length === 0 || (typeId && typeParam.includes(typeId));
+
+      return brandMatch && typeMatch;
+    });
+  }, [selectedBrands, typeParam, allKeys]);
 
   return (
     <>
@@ -43,7 +63,11 @@ const Keys = ({ allKeys }: FiltersProps) => {
       <div className="flex flex-col">
         <div className="flex flex-row items-start justify-between">
           <div className="flex flex-col justify-center w-full pt-10 pb-4">
-            <KeysToolbar selectedBrands={selectedBrands} />
+            <KeysToolbar
+              selectedBrands={selectedBrands}
+              selectedTypes={selectedTypes}
+              selectedClasses={selectedClasses}
+            />
             <div className="h-0.5 w-full my-4 border-b-2 border-gray-300" />
             {loading ? (
               <p className="w-full">Loading....</p>

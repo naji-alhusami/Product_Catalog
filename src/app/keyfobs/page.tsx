@@ -8,10 +8,10 @@ export default function KeyfobsPage() {
   return (
     <div>
       <Navbar />
-      <div className="flex flex-col mx-12 my-20 lg:px-20">
+      <div className="flex flex-col mx-12 my-20 lg:px-12">
         <KeysHeader />
         <div className="flex flex-row">
-          <div className="hidden lg:flex flex-col w-80 pr-16 py-32">
+          <div className="hidden lg:flex flex-col w-100 pr-16 py-32">
             <h1 className="text-2xl font-semibold">Filters</h1>
             <Suspense fallback={<p>Loading Filters...</p>}>
               <FiltersSidebar />

@@ -7,14 +7,20 @@ import StateContext from "@/app/store/state-context";
 
 type KeysToolbarProps = {
   selectedBrands: string[];
+  selectedTypes: string[];
+  selectedClasses: string[];
 };
 
-const KeysToolbar = ({ selectedBrands }: KeysToolbarProps) => {
+const KeysToolbar = ({
+  selectedBrands,
+  selectedTypes,
+  selectedClasses,
+}: KeysToolbarProps) => {
   const contextValue = useContext(StateContext) as {
     showFiltersModalHandler: () => void;
   };
   const { showFiltersModalHandler } = contextValue;
-  
+
   const filterOptions = ["By Datea", "By Rated", "By Date"];
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>("All");
@@ -37,6 +43,9 @@ const KeysToolbar = ({ selectedBrands }: KeysToolbarProps) => {
     router.push("/keyfobs");
   };
 
+  const totalSelected =
+    selectedBrands.length + selectedClasses.length + selectedTypes.length;
+
   return (
     <div className="w-full flex flex-row justify-between items-center">
       <div className="flex justify-start items-center lg:hidden">
@@ -49,7 +58,7 @@ const KeysToolbar = ({ selectedBrands }: KeysToolbarProps) => {
           } font-medium hover:bg-blue-50 text-sm`}
         >
           <span className="flex items-center gap-1">
-            Filters {selectedBrands.length > 0 && `(${selectedBrands.length})`}
+            Filters {totalSelected > 0 && `(${totalSelected})`}
           </span>
           <SlidersHorizontal className="w-4 h-4" />
         </button>
@@ -57,6 +66,8 @@ const KeysToolbar = ({ selectedBrands }: KeysToolbarProps) => {
       <div className="hidden lg:flex">
         <SelectedFiltersBar
           selectedBrands={selectedBrands}
+          selectedTypes={selectedTypes}
+          selectedClasses={selectedClasses}
           onRemoveBrand={handleRemoveBrand}
           onClearAll={handleClearAll}
         />

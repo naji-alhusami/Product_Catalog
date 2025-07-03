@@ -9,7 +9,6 @@ type ClassesFiltersProps = {
 const ClassesFilters = ({ AllClasses }: ClassesFiltersProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams.toString());
 
   const selectedClasses = searchParams.getAll("class");
 
@@ -38,7 +37,7 @@ const ClassesFilters = ({ AllClasses }: ClassesFiltersProps) => {
   };
 
   return (
-    <div>
+    <div className="py-6">
       <h1 className="py-2 font-bold text-cyan-900 text-lg">Classes</h1>
 
       {visibleClasses.map((cls) => (
