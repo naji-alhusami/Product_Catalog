@@ -1,5 +1,5 @@
 import Image from "next/image";
-import HomeImage from "@/Images/HomeImage.jpg";
+// import HomeImage from "@/Images/HomeImage.jpg";
 import Navbar from "../layout/Navbar/BasicNavbar";
 
 const LandingHome = () => {
@@ -12,7 +12,7 @@ const LandingHome = () => {
 
       {/* Background Image */}
       <Image
-        src={HomeImage}
+        src="/HomeImage.jpg"
         alt="home-image"
         className="z-0 object-cover"
         priority

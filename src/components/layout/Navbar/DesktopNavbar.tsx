@@ -2,13 +2,13 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import Logo from "@/Images/test.png";
+// import Logo from "@/Images/test.png";
 
 const DesktopNavbar = () => {
   return (
     <div className="hidden md:w-full md:h-16 md:flex flex-row justify-between items-center bg-white shadow-2xl lg:px-36 border-b-1 border-cyan-300">
       <Image
-        src={Logo}
+        src="/test.png"
         alt="logo"
         width={250}
         height={250}

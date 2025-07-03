@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 
-import box from "../../Images/box.jpg";
+// import box from "../../Images/box.jpg";
 
 const KeysHeader = () => {
   return (
@@ -41,7 +41,7 @@ const KeysHeader = () => {
       </div>
       <div>
         <Image
-          src={box}
+          src="/box.jpg"
           alt="box"
           width={600}
           height={500}

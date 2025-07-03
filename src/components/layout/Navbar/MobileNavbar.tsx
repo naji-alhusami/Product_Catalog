@@ -2,18 +2,21 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import Logo from "@/Images/test.png";
+// import Logo from "@/Images/test.png";
 
 type MobileNavbarProps = {
   isToggled: boolean;
   toggleButtonHandler: () => void;
 };
 
-const MobileNavbar = ({ isToggled, toggleButtonHandler }: MobileNavbarProps) => {
+const MobileNavbar = ({
+  isToggled,
+  toggleButtonHandler,
+}: MobileNavbarProps) => {
   return (
     <>
       <div className="w-60 h-16 p-2 border-b-3 border-x-3 border-cyan-300 bg-white rounded-b-full flex justify-center items-center absolute top-0 left-1/2 transform -translate-x-1/2 md:hidden">
-        <Image src={Logo} alt="logo" width={500} height={500} />
+        <Image src="/test.png" alt="logo" width={500} height={500} />
       </div>
       <div>
         <nav className="fixed w-full z-40 px-6 py-3 md:flex flex-row items-center justify-between md:px-8 md:py-0 lg:px-20">

@@ -20,7 +20,7 @@ const BrandsFilter = ({ brands }: BrandFilterProps) => {
     : cleanedBrands.slice(0, maxVisible);
 
   const handleToggleBrand = (brand: string) => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams.toString());
     const current = new Set(selectedBrands);
 
     if (current.has(brand)) {
@@ -29,6 +29,7 @@ const BrandsFilter = ({ brands }: BrandFilterProps) => {
       current.add(brand);
     }
 
+    params.delete("brand");
     current.forEach((b) => params.append("brand", b));
     router.push(`/keyfobs?${params.toString()}`, { scroll: false });
   };

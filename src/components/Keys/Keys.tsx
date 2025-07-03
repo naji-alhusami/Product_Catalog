@@ -9,7 +9,6 @@ import { useSearchParams } from "next/navigation";
 import StateContext from "@/app/store/state-context";
 
 type FiltersProps = {
-  // brands: { [key: string]: string | string[] | undefined };
   allKeys: Key[];
 };
 
@@ -21,8 +20,6 @@ const Keys = ({ allKeys }: FiltersProps) => {
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
   const brandParam = searchParams.getAll("brand");
-
-  console.log("Selected brands:", brandParam);
 
   useEffect(() => {
     setLoading(true);
