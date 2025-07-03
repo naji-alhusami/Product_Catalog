@@ -21,6 +21,7 @@ const AllKeys = ({ allKeys, brands }: allKeysProps) => {
             width={500}
             height={100}
             className="rounded-md"
+            priority
           />
           <div className="flex flex-row items-center justify-start py-4">
             <h1 className="font-bold text-md pr-2">Brand:</h1>

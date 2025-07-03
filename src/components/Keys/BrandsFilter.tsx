@@ -1,20 +1,16 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { use, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 type BrandFilterProps = {
   brands: string[];
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-const BrandsFilter = ({ brands, searchParams }: BrandFilterProps) => {
+const BrandsFilter = ({ brands }: BrandFilterProps) => {
   const router = useRouter();
-  const query = use(searchParams);
-  const selectedBrands: string[] = Array.isArray(query.brand)
-    ? query.brand.map((b) => b.trim())
-    : query.brand
-    ? [query.brand.trim()]
-    : [];
+  const searchParams = useSearchParams();
+
+  const selectedBrands = searchParams.getAll("brand");
 
   const [isExpanded, setIsExpanded] = useState(false);
   const maxVisible = 5;

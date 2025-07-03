@@ -14,10 +14,9 @@ const LandingHome = () => {
       <Image
         src={HomeImage}
         alt="home-image"
-        layout="fill"
-        objectFit="cover"
-        className="z-0"
+        className="z-0 object-cover"
         priority
+        fill
       />
 
       {/* Dark overlay */}
