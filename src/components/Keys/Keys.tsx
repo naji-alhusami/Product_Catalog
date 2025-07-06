@@ -1,11 +1,11 @@
 "use client";
 import { useContext, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 import AllKeys from "./AllKeys";
 import FiltersModal from "./FiltersModal";
 import KeysToolbar from "./KeysToolbar";
 import { type Key } from "../lib/getAllKeys";
-import { useSearchParams } from "next/navigation";
 import StateContext from "@/app/store/state-context";
 
 type FiltersProps = {
