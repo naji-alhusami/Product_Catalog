@@ -7,6 +7,7 @@ import FiltersModal from "./FiltersModal";
 import KeysToolbar from "./KeysToolbar";
 import { type Key } from "../lib/getAllKeys";
 import StateContext from "@/app/store/state-context";
+import KeysLoading from "./KeysLoading";
 
 type FiltersProps = {
   allKeys: Key[];
@@ -70,7 +71,7 @@ const Keys = ({ allKeys }: FiltersProps) => {
             /> */}
             {/* <div className="h-0.5 w-full my-4 border-b-2 border-gray-300" /> */}
             {loading ? (
-              <p className="w-full">Loading....</p>
+              <KeysLoading />
             ) : (
               <AllKeys allKeys={filteredKeys} brands={brandParam} />
             )}

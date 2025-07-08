@@ -5,6 +5,7 @@ import KeysHeader from "@/components/Keys/KeysHeader";
 import FiltersSidebar from "@/components/Keys/FiltersSidebar";
 import KeysToolbar from "@/components/Keys/KeysToolbar";
 import KeysLoading from "@/components/Keys/KeysLoading";
+import FiltersLoading from "@/components/Keys/FiltersLoading";
 
 export default function KeyfobsPage() {
   return (
@@ -15,7 +16,7 @@ export default function KeyfobsPage() {
         <div className="flex flex-row">
           <div className="hidden lg:flex flex-col w-100 pr-16 py-32">
             <h1 className="text-2xl font-semibold">Filters</h1>
-            <Suspense fallback={<p>Loading Filters...</p>}>
+            <Suspense fallback={<FiltersLoading />}>
               <FiltersSidebar />
             </Suspense>
           </div>
