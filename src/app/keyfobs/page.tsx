@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import KeysLoader from "@/components/Keys/KeysLoader";
 import KeysHeader from "@/components/Keys/KeysHeader";
 import FiltersSidebar from "@/components/Keys/FiltersSidebar";
+import KeysToolbar from "@/components/Keys/KeysToolbar";
 
 export default function KeyfobsPage() {
   return (
@@ -17,9 +18,12 @@ export default function KeyfobsPage() {
               <FiltersSidebar />
             </Suspense>
           </div>
-          <Suspense fallback={<p>Loading keys...</p>}>
-            <KeysLoader />
-          </Suspense>
+          <div className="w-full">
+            <KeysToolbar />
+            <Suspense fallback={<p>Loading keys...</p>}>
+              <KeysLoader />
+            </Suspense>
+          </div>
         </div>
       </div>
     </div>

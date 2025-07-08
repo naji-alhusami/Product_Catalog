@@ -62,13 +62,13 @@ const Keys = ({ allKeys }: FiltersProps) => {
       {isFiltersModal && <FiltersModal />}
       <div className="flex flex-col">
         <div className="flex flex-row items-start justify-between">
-          <div className="flex flex-col justify-center w-full pt-10 pb-4">
-            <KeysToolbar
+          <div className="flex flex-col justify-center w-full pt-2 pb-4">
+            {/* <KeysToolbar
               selectedBrands={selectedBrands}
               selectedTypes={selectedTypes}
               selectedClasses={selectedClasses}
-            />
-            <div className="h-0.5 w-full my-4 border-b-2 border-gray-300" />
+            /> */}
+            {/* <div className="h-0.5 w-full my-4 border-b-2 border-gray-300" /> */}
             {loading ? (
               <p className="w-full">Loading....</p>
             ) : (

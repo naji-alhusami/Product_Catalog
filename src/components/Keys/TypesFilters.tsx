@@ -4,11 +4,11 @@ import { useState } from "react";
 import { Key } from "../lib/getAllKeys";
 
 type BrandFilterProps = {
-  allKeys: Key[];
+  AllKeys: Key[];
 };
 
-const TypesFilter = ({ allKeys }: BrandFilterProps) => {
-  console.log(allKeys);
+const TypesFilter = ({ AllKeys }: BrandFilterProps) => {
+  console.log(AllKeys);
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -16,15 +16,22 @@ const TypesFilter = ({ allKeys }: BrandFilterProps) => {
 
   const [isExpanded, setIsExpanded] = useState(false);
   const maxVisible = 5;
-  const AllTypes = Array.from(new Set(allKeys.map((key) => key.boxName)));
+  const AllTypes = Array.from(
+    new Set(
+      AllKeys.flatMap((key) => {
+        const match = key.boxName.match(/\b\d{3}\b/);
+        return match ? [match[0]] : [];
+      })
+    )
+  ).sort((a, b) => Number(a) - Number(b));
   const visibleTypes = isExpanded ? AllTypes : AllTypes.slice(0, maxVisible);
 
   const handleToggleType = (type: string) => {
-    const number = type.match(/\d+/)?.[0]; // get the number from "Box 111"
+    const number = type.match(/\d+/)?.[0];
     if (!number) return;
 
     const params = new URLSearchParams(searchParams.toString());
-    const current = new Set(selectedTypes); // ["111", "113"]
+    const current = new Set(selectedTypes);
 
     if (current.has(number)) {
       current.delete(number);
@@ -59,7 +66,7 @@ const TypesFilter = ({ allKeys }: BrandFilterProps) => {
               className="h-4 w-4"
             />
             <label htmlFor={boxName} className="text-sm">
-              {boxName}
+              Typ {boxName}
             </label>
           </div>
         );

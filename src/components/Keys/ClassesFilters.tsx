@@ -3,10 +3,10 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
 type ClassesFiltersProps = {
-  AllClasses: string[];
+  UniqueClasses: string[];
 };
 
-const ClassesFilters = ({ AllClasses }: ClassesFiltersProps) => {
+const ClassesFilters = ({ UniqueClasses }: ClassesFiltersProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -15,10 +15,10 @@ const ClassesFilters = ({ AllClasses }: ClassesFiltersProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const maxVisible = 5;
 
-  const uniqueClasses = [...new Set(AllClasses)].filter(Boolean);
+  // const uniqueClasses = [...new Set(AllClasses)].filter(Boolean);
   const visibleClasses = isExpanded
-    ? uniqueClasses
-    : uniqueClasses.slice(0, maxVisible);
+    ? UniqueClasses
+    : UniqueClasses.slice(0, maxVisible);
 
   const handleToggleClass = (cls: string) => {
     const params = new URLSearchParams(searchParams.toString()); // preserve full state
@@ -56,7 +56,7 @@ const ClassesFilters = ({ AllClasses }: ClassesFiltersProps) => {
         </div>
       ))}
 
-      {uniqueClasses.length > maxVisible && (
+      {UniqueClasses.length > maxVisible && (
         <button
           className="text-blue-600 text-sm mt-1"
           onClick={() => setIsExpanded(!isExpanded)}
