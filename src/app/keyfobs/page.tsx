@@ -4,6 +4,7 @@ import KeysLoader from "@/components/Keys/KeysLoader";
 import KeysHeader from "@/components/Keys/KeysHeader";
 import FiltersSidebar from "@/components/Keys/FiltersSidebar";
 import KeysToolbar from "@/components/Keys/KeysToolbar";
+import KeysLoading from "@/components/Keys/KeysLoading";
 
 export default function KeyfobsPage() {
   return (
@@ -20,7 +21,7 @@ export default function KeyfobsPage() {
           </div>
           <div className="w-full">
             <KeysToolbar />
-            <Suspense fallback={<p>Loading keys...</p>}>
+            <Suspense fallback={<KeysLoading />}>
               <KeysLoader />
             </Suspense>
           </div>
