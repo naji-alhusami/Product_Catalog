@@ -15,14 +15,20 @@ const TypesFilter = ({ Keys }: BrandFilterProps) => {
 
   const [isExpanded, setIsExpanded] = useState(false);
   const maxVisible = 5;
-  const AllTypes = Array.from(
-    new Set(
-      Keys.flatMap((key) => {
-        const match = key.boxName.match(/\b\d{3}\b/);
-        return match ? [match[0]] : [];
-      })
-    )
-  ).sort((a, b) => Number(a) - Number(b));
+  const typeCounts: Record<string, number> = {};
+
+  Keys.forEach((key) => {
+    const match = key.boxName.match(/\b\d{3}\b/);
+    if (match) {
+      const type = match[0];
+      typeCounts[type] = (typeCounts[type] || 0) + 1;
+    }
+  });
+
+  const AllTypes = Object.entries(typeCounts)
+    .map(([type, count]) => ({ type, count }))
+    .sort((a, b) => Number(a.type) - Number(b.type));
+
   const visibleTypes = isExpanded ? AllTypes : AllTypes.slice(0, maxVisible);
 
   const handleToggleType = (type: string) => {
@@ -48,24 +54,25 @@ const TypesFilter = ({ Keys }: BrandFilterProps) => {
     <div className="">
       <h1 className="py-2 font-bold text-cyan-900 text-lg">Types</h1>
 
-      {visibleTypes.map((boxName, index) => {
-        const number = boxName.match(/\d+/)?.[0] ?? "";
-
+      {visibleTypes.map(({ type, count }) => {
         return (
-          <div
-            key={`${number}-${index}`}
-            className="flex items-center space-x-2 mb-1"
-          >
+          <div key={type} className="flex items-center space-x-2 mb-1">
             <input
               type="checkbox"
               name="type"
-              value={boxName}
-              checked={selectedTypes.includes(number)}
-              onChange={() => handleToggleType(boxName)}
+              value={type}
+              checked={selectedTypes.includes(type)}
+              onChange={() => handleToggleType(type)}
               className="h-4 w-4"
             />
-            <label htmlFor={boxName} className="text-sm">
-              Typ {boxName}
+            <label htmlFor={type} className="text-sm text-black">
+              Typ {type}
+            </label>
+            <label
+              htmlFor={type}
+              className="text-sm text-gray-400 font-semibold"
+            >
+              ({count})
             </label>
           </div>
         );

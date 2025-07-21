@@ -1,10 +1,12 @@
 "use client";
-import StateContext from "@/app/store/state-context";
-import { useSearchParams, useRouter } from "next/navigation";
 import { useContext, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+
+import StateContext from "@/app/store/state-context";
+import { type ClassWithCount } from "@/components/lib/getClasses";
 
 type ClassesFiltersProps = {
-  Classes: string[];
+  Classes: ClassWithCount[];
 };
 
 const ClassesFilters = ({ Classes }: ClassesFiltersProps) => {
@@ -21,9 +23,7 @@ const ClassesFilters = ({ Classes }: ClassesFiltersProps) => {
   const maxVisible = 5;
 
   // const uniqueClasses = [...new Set(AllClasses)].filter(Boolean);
-  const visibleClasses = isExpanded
-    ? Classes
-    : Classes.slice(0, maxVisible);
+  const visibleClasses = isExpanded ? Classes : Classes.slice(0, maxVisible);
 
   const handleToggleClass = (cls: string) => {
     const params = new URLSearchParams(searchParams.toString()); // preserve full state
@@ -49,18 +49,21 @@ const ClassesFilters = ({ Classes }: ClassesFiltersProps) => {
     <div className="py-6">
       <h1 className="py-2 font-bold text-cyan-900 text-lg">Classes</h1>
 
-      {visibleClasses.map((cls) => (
-        <div key={cls} className="flex items-center space-x-2 mb-1">
+      {visibleClasses.map(({ name, count }) => (
+        <div key={name} className="flex items-center space-x-2 mb-1">
           <input
             type="checkbox"
             name="class"
-            value={cls}
-            checked={selectedClasses.includes(cls)}
-            onChange={() => handleToggleClass(cls)}
+            value={name}
+            checked={selectedClasses.includes(name)}
+            onChange={() => handleToggleClass(name)}
             className="h-4 w-4"
           />
-          <label htmlFor={cls} className="text-sm">
-            {cls}
+          <label htmlFor={name} className="text-sm text-black">
+            {name}
+          </label>
+          <label htmlFor={name} className="text-sm text-gray-400 font-semibold">
+            ({count})
           </label>
         </div>
       ))}

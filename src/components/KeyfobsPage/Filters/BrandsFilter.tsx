@@ -1,13 +1,16 @@
 "use client";
-import StateContext from "@/app/store/state-context";
+import { useContext, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+
+import StateContext from "@/app/store/state-context";
+import { Key } from "@/components/lib/getKeys";
 
 type BrandFilterProps = {
   Brands: string[];
+  Keys: Key[];
 };
 
-const BrandsFilter = ({ Brands }: BrandFilterProps) => {
+const BrandsFilter = ({ Brands, Keys }: BrandFilterProps) => {
   const contextValue = useContext(StateContext);
   if (!contextValue) return null;
   const { setSelectedFilters } = contextValue;
@@ -17,13 +20,26 @@ const BrandsFilter = ({ Brands }: BrandFilterProps) => {
 
   const selectedBrands = searchParams.getAll("brand");
 
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const maxVisible = 5;
-  const cleanedBrands = Brands.map((b) => b.trim());
-  const visibleBrands = isExpanded
-    ? cleanedBrands
-    : cleanedBrands.slice(0, maxVisible);
 
+  // Create array of brands name and count:
+  const brandCounts: Record<string, number> = {};
+
+  for (const key of Keys) {
+    const brand = key.brand.trim().toUpperCase();
+    brandCounts[brand] = (brandCounts[brand] || 0) + 1;
+  }
+
+  const BrandsWithCounts = Brands?.map((brand) => {
+    const name = brand.trim().toUpperCase();
+    return {
+      name,
+      count: brandCounts[name] || 0,
+    };
+  });
+
+  // Manage URL when
   const handleToggleBrand = (brand: string) => {
     const params = new URLSearchParams(searchParams.toString());
     const current = new Set(selectedBrands);
@@ -43,28 +59,28 @@ const BrandsFilter = ({ Brands }: BrandFilterProps) => {
     }));
   };
 
-  // useEffect(() => {
-  //   if (setSelectedFilters) {
-  //     setSelectedFilters(selectedBrands);
-  //   }
-  // }, [selectedBrands, setSelectedFilters]);
-
   return (
     <div className="">
       <h1 className="py-2 font-bold text-cyan-900 text-lg">Brands</h1>
 
-      {visibleBrands.map((brand) => (
-        <div key={brand} className="flex items-center space-x-2 mb-1">
+      {BrandsWithCounts.slice(
+        0,
+        isExpanded ? BrandsWithCounts.length : maxVisible
+      ).map(({ name, count }) => (
+        <div key={name} className="flex items-center space-x-2 mb-1">
           <input
             type="checkbox"
             name="brand"
-            value={brand}
-            checked={selectedBrands.includes(brand)}
-            onChange={() => handleToggleBrand(brand)}
+            value={name}
+            checked={selectedBrands.includes(name)}
+            onChange={() => handleToggleBrand(name)}
             className="h-4 w-4"
           />
-          <label htmlFor={brand} className="text-sm">
-            {brand}
+          <label htmlFor={name} className="text-sm text-black">
+            {name}
+          </label>
+          <label htmlFor={name} className="text-sm text-gray-400 font-semibold">
+            ({count})
           </label>
         </div>
       ))}

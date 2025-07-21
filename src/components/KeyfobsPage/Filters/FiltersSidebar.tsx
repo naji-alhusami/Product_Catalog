@@ -9,21 +9,21 @@ export default async function FiltersSidebar() {
   // Get Brands:
   const Brands = await getBrands();
 
-  // Get All Keys:
-  const Keys = await getKeys();
-
   // Get All Classes:
   const Classes = await getClasses();
+
+  // Get All Keys:
+  const Keys = await getKeys();
 
   if (!Brands || !Classes || !Keys) {
     return <p>Unable to load filters.</p>;
   }
 
   return (
-    <div>
-      <BrandsFilter Brands={Brands} />
+    <>
+      <BrandsFilter Brands={Brands} Keys={Keys} />
       <ClassesFilters Classes={Classes} />
       <TypesFilter Keys={Keys} />
-    </div>
+    </>
   );
 }
