@@ -4,10 +4,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
 type BrandFilterProps = {
-  brands: string[];
+  Brands: string[];
 };
 
-const BrandsFilter = ({ brands }: BrandFilterProps) => {
+const BrandsFilter = ({ Brands }: BrandFilterProps) => {
   const contextValue = useContext(StateContext);
   if (!contextValue) return null;
   const { setSelectedFilters } = contextValue;
@@ -19,7 +19,7 @@ const BrandsFilter = ({ brands }: BrandFilterProps) => {
 
   const [isExpanded, setIsExpanded] = useState(false);
   const maxVisible = 5;
-  const cleanedBrands = brands.map((b) => b.trim());
+  const cleanedBrands = Brands.map((b) => b.trim());
   const visibleBrands = isExpanded
     ? cleanedBrands
     : cleanedBrands.slice(0, maxVisible);
@@ -69,7 +69,7 @@ const BrandsFilter = ({ brands }: BrandFilterProps) => {
         </div>
       ))}
 
-      {brands.length > maxVisible && (
+      {Brands.length > maxVisible && (
         <button
           className="text-blue-600 text-sm mt-1"
           onClick={() => setIsExpanded(!isExpanded)}

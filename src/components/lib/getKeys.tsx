@@ -13,13 +13,13 @@ export type Key = {
   };
 };
 
-export async function getAllKeys(): Promise<Key[]> {
+export async function getKeys(): Promise<Key[]> {
   const brands = await getBrands();
 
   if (!brands) return [];
-  const cleanedBrands = brands.map((b) => b.trim());
-  const keysPromises = cleanedBrands.map((brand) => getKeysByBrand(brand));
-  const allKeysArrays = await Promise.all(keysPromises);
+  const allKeysArrays = await Promise.all(
+    brands.map((brand) => getKeysByBrand(brand))
+  );
 
   const allKeys = allKeysArrays.flat().filter(Boolean);
 

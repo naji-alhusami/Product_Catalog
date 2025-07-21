@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import AllKeys from "./AllKeys";
 import FiltersModal from "../Filters/FiltersModal";
 import KeysToolbar from "./KeysToolbar";
-import { type Key } from "../../lib/getAllKeys";
+import { type Key } from "../../lib/getKeys";
 import StateContext from "@/app/store/state-context";
 import KeysLoading from "./KeysLoading";
 

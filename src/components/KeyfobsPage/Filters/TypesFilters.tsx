@@ -1,13 +1,13 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { Key } from "@/components/lib/getAllKeys";
+import { Key } from "@/components/lib/getKeys";
 
 type BrandFilterProps = {
-  AllKeys: Key[];
+  Keys: Key[];
 };
 
-const TypesFilter = ({ AllKeys }: BrandFilterProps) => {
+const TypesFilter = ({ Keys }: BrandFilterProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -17,7 +17,7 @@ const TypesFilter = ({ AllKeys }: BrandFilterProps) => {
   const maxVisible = 5;
   const AllTypes = Array.from(
     new Set(
-      AllKeys.flatMap((key) => {
+      Keys.flatMap((key) => {
         const match = key.boxName.match(/\b\d{3}\b/);
         return match ? [match[0]] : [];
       })

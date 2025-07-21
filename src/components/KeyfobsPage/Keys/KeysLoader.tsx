@@ -1,8 +1,8 @@
 import Keys from "./Keys";
-import { getValidKeys } from "../../lib/getValidKeys";
+import { getKeys } from "@/components/lib/getKeys";
 
 export default async function KeysLoader() {
-  const allKeys = await getValidKeys();
+  const allKeys = await getKeys();
   
   return <Keys allKeys={allKeys} />;
 }

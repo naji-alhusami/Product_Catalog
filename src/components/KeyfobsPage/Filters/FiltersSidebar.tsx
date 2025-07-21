@@ -1,28 +1,29 @@
-import { getAllKeys } from "../../lib/getAllKeys";
-import { getBoxesClasses } from "../../lib/getBoxesClasses";
+import { getClasses } from "@/components/lib/getClasses";
+import { getKeys } from "../../lib/getKeys";
 import { getBrands } from "../../lib/getBrands";
 import BrandsFilter from "./BrandsFilter";
 import ClassesFilters from "./ClassesFilters";
 import TypesFilter from "./TypesFilters";
 
 export default async function FiltersSidebar() {
-  const brands = await getBrands();
-  const AllKeys = await getAllKeys();
+  // Get Brands:
+  const Brands = await getBrands();
 
-  const AllClassesRaw = await Promise.all(
-    AllKeys.map((key) => getBoxesClasses(key.boxSapNumber))
-  );
-  const UniqueClasses: string[] = [
-    ...new Set(AllClassesRaw.filter((cls): cls is string => cls !== null)),
-  ];
+  // Get All Keys:
+  const Keys = await getKeys();
 
-  if (brands && UniqueClasses) {
-    return (
-      <div>
-        <BrandsFilter brands={brands} />
-        <ClassesFilters UniqueClasses={UniqueClasses} />
-        <TypesFilter AllKeys={AllKeys} />
-      </div>
-    );
+  // Get All Classes:
+  const Classes = await getClasses();
+
+  if (!Brands || !Classes || !Keys) {
+    return <p>Unable to load filters.</p>;
   }
+
+  return (
+    <div>
+      <BrandsFilter Brands={Brands} />
+      <ClassesFilters Classes={Classes} />
+      <TypesFilter Keys={Keys} />
+    </div>
+  );
 }
