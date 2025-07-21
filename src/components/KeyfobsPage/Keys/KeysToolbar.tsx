@@ -2,7 +2,7 @@
 import { useContext, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MoveDown, MoveUp, SlidersHorizontal } from "lucide-react";
-import SelectedFiltersBar from "./SelectedFiltersBar";
+import SelectedFiltersBar from "../Filters/SelectedFiltersBar";
 import { useRouter } from "next/navigation";
 import StateContext from "@/app/store/state-context";
 
@@ -18,9 +18,16 @@ const KeysToolbar = ({}: // selectedBrands,
 KeysToolbarProps) => {
   const contextValue = useContext(StateContext) as {
     showFiltersModalHandler: () => void;
+    selectedFilters: {
+      brands: string[];
+      classes: string[];
+      types: string[];
+    };
   };
-  const { showFiltersModalHandler } = contextValue;
+  const { selectedFilters, showFiltersModalHandler } = contextValue;
+  const { brands, classes, types } = selectedFilters;
 
+  const allSelected = [...brands, ...classes, ...types];
   const filterOptions = ["By Datea", "By Rated", "By Date"];
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>("All");
@@ -50,35 +57,37 @@ KeysToolbarProps) => {
     <>
       <div className="w-full flex flex-row justify-between items-center">
         <div className="flex justify-start items-center lg:hidden">
-          {/* <button
-          onClick={showFiltersModalHandler}
-          className={`cursor-pointer flex items-center gap-2 px-4 py-2 border 
-            ${
-             selectedBrands.length > 0
-               ? "border-blue-600 text-blue-600"
-               : "border-black text-black"
-          } 
-          font-medium hover:bg-blue-50 text-sm`}
-        > */}
           <button
             onClick={showFiltersModalHandler}
-            className="cursor-pointer flex items-center gap-2 px-4 py-2 border font-medium hover:bg-blue-50 text-sm"
+            className={`cursor-pointer flex items-center gap-2 px-4 py-2 border 
+            ${
+              allSelected.length > 0
+                ? "border-blue-600 text-blue-600"
+                : "border-black text-black"
+            } 
+          font-medium hover:bg-blue-50 text-sm`}
           >
-            {/* <span className="flex items-center gap-1">
-            Filters {totalSelected > 0 && `(${totalSelected})`}
-          </span> */}
+            {/* <button
+            onClick={showFiltersModalHandler}
+            className="cursor-pointer flex items-center gap-2 px-4 py-2 border font-medium hover:bg-blue-50 text-sm"
+          > */}
+            <span className="flex items-center gap-1">
+              Filters{" "}
+              {allSelected.length > 0 && `(${allSelected.length})`}
+            </span>
             <SlidersHorizontal className="w-4 h-4" />
           </button>
         </div>
-        {/* <div className="hidden lg:flex">
-        <SelectedFiltersBar
-          selectedBrands={selectedBrands}
-          selectedTypes={selectedTypes}
-          selectedClasses={selectedClasses}
-          onRemoveBrand={handleRemoveBrand}
-          onClearAll={handleClearAll}
-        />
-      </div> */}
+        <div className="hidden lg:flex">
+          <SelectedFiltersBar
+            allSelected={allSelected}
+            // selectedBrands={selectedBrands}
+            // selectedTypes={selectedTypes}
+            // selectedClasses={selectedClasses}
+            // onRemoveBrand={handleRemoveBrand}
+            // onClearAll={handleClearAll}
+          />
+        </div>
         {/* Dropdown Button */}
         <div className="relative text-right w-50 lg:w-60 flex flex-row justify-center items-center gap-x-6">
           <h1 className="font-semibold w-35">Sort By:</h1>

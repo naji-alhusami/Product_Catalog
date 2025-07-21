@@ -3,9 +3,9 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import AllKeys from "./AllKeys";
-import FiltersModal from "./FiltersModal";
+import FiltersModal from "../Filters/FiltersModal";
 import KeysToolbar from "./KeysToolbar";
-import { type Key } from "../lib/getAllKeys";
+import { type Key } from "../../lib/getAllKeys";
 import StateContext from "@/app/store/state-context";
 import KeysLoading from "./KeysLoading";
 
@@ -24,7 +24,6 @@ const Keys = ({ allKeys }: FiltersProps) => {
   const typeParam = searchParams.getAll("type");
   const classParam = searchParams.getAll("class");
 
-  console.log("typeParam:", typeParam);
 
   useEffect(() => {
     setLoading(true);

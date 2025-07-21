@@ -1,12 +1,17 @@
 "use client";
+import StateContext from "@/app/store/state-context";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 type ClassesFiltersProps = {
   UniqueClasses: string[];
 };
 
 const ClassesFilters = ({ UniqueClasses }: ClassesFiltersProps) => {
+  const contextValue = useContext(StateContext);
+  if (!contextValue) return null;
+  const { setSelectedFilters } = contextValue;
+
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -34,6 +39,10 @@ const ClassesFilters = ({ UniqueClasses }: ClassesFiltersProps) => {
     current.forEach((c) => params.append("class", c)); // re-add updated classes
 
     router.push(`/keyfobs?${params.toString()}`, { scroll: false });
+    setSelectedFilters((prev) => ({
+      ...prev,
+      classes: Array.from(current),
+    }));
   };
 
   return (

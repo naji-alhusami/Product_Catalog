@@ -1,7 +1,4 @@
-"use client";
 import Image from "next/image";
-
-// import box from "../../Images/box.jpg";
 
 const KeysHeader = () => {
   return (

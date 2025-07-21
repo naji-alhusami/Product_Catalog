@@ -1,6 +1,6 @@
-import { getAllKeys } from "../lib/getAllKeys";
-import { getBoxesClasses } from "../lib/getBoxesClasses";
-import { getBrands } from "../lib/getBrands";
+import { getAllKeys } from "../../lib/getAllKeys";
+import { getBoxesClasses } from "../../lib/getBoxesClasses";
+import { getBrands } from "../../lib/getBrands";
 import BrandsFilter from "./BrandsFilter";
 import ClassesFilters from "./ClassesFilters";
 import TypesFilter from "./TypesFilters";

@@ -1,11 +1,12 @@
-import Navbar from "@/components/layout/Navbar/BasicNavbar";
 import { Suspense } from "react";
-import KeysLoader from "@/components/Keys/KeysLoader";
-import KeysHeader from "@/components/Keys/KeysHeader";
-import FiltersSidebar from "@/components/Keys/FiltersSidebar";
-import KeysToolbar from "@/components/Keys/KeysToolbar";
-import KeysLoading from "@/components/Keys/KeysLoading";
-import FiltersLoading from "@/components/Keys/FiltersLoading";
+
+import Navbar from "@/components/layout/Navbar/BasicNavbar";
+import KeysHeader from "@/components/KeyfobsPage/Header/KeysHeader";
+import FiltersSidebar from "@/components/KeyfobsPage/Filters/FiltersSidebar";
+import FiltersLoading from "@/components/KeyfobsPage/Filters/FiltersLoading";
+import KeysLoader from "@/components/KeyfobsPage/Keys/KeysLoader";
+import KeysToolbar from "@/components/KeyfobsPage/Keys/KeysToolbar";
+import KeysLoading from "@/components/KeyfobsPage/Keys/KeysLoading";
 
 export default function KeyfobsPage() {
   return (

@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { type Key } from "../lib/getAllKeys";
+import { type Key } from "../../lib/getAllKeys";
 import KeysNavigator from "./KeysNavigator";
 
 type AllKeysProps = {

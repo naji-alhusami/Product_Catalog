@@ -1,14 +1,13 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { Key } from "../lib/getAllKeys";
+import { Key } from "@/components/lib/getAllKeys";
 
 type BrandFilterProps = {
   AllKeys: Key[];
 };
 
 const TypesFilter = ({ AllKeys }: BrandFilterProps) => {
-  console.log(AllKeys);
   const router = useRouter();
   const searchParams = useSearchParams();
 

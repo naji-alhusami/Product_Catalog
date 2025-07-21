@@ -1,37 +1,39 @@
 type SelectedFiltersBarProps = {
-  selectedBrands: string[];
-  selectedClasses: string[];
-  selectedTypes: string[];
-  onRemoveBrand: (brand: string) => void;
-  onClearAll: () => void;
+  allSelected: string[];
+  // selectedBrands: string[];
+  // selectedClasses: string[];
+  // selectedTypes: string[];
+  // onRemoveBrand: (brand: string) => void;
+  // onClearAll: () => void;
 };
 
 const SelectedFiltersBar = ({
-  selectedBrands,
-  selectedTypes,
-  selectedClasses,
-  onRemoveBrand,
-  onClearAll,
-}: SelectedFiltersBarProps) => {
-  if (selectedBrands.length === 0) return null;
+  allSelected,
+}: // selectedBrands,
+// selectedTypes,
+// selectedClasses,
+// onRemoveBrand,
+// onClearAll,
+SelectedFiltersBarProps) => {
+  if (allSelected.length === 0) return null;
 
   return (
     <div className="flex items-center gap-4">
-      {selectedBrands.map((brand) => (
+      {allSelected.map((filter) => (
         <div
-          key={brand}
+          key={filter}
           className="flex items-center border border-blue-500 text-blue-700 px-3 py-1 rounded-full text-sm"
         >
-          <span>{brand}</span>
+          <span>{filter}</span>
           <button
-            onClick={() => onRemoveBrand(brand)}
+            // onClick={() => onRemoveBrand(brand)}
             className="ml-2 text-blue-700 hover:text-blue-900 cursor-pointer"
           >
             ×
           </button>
         </div>
       ))}
-      {selectedTypes.map((type) => (
+      {/* {selectedTypes.map((type) => (
         <div
           key={type}
           className="flex items-center border border-blue-500 text-blue-700 px-3 py-1 rounded-full text-sm"
@@ -58,9 +60,9 @@ const SelectedFiltersBar = ({
             ×
           </button>
         </div>
-      ))}
+      ))} */}
       <button
-        onClick={onClearAll}
+        // onClick={onClearAll}
         className="text-sm text-blue-700 underline hover:text-blue-900 cursor-pointer"
       >
         Clear all

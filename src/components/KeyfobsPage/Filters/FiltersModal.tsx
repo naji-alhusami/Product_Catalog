@@ -1,7 +1,7 @@
 import { XCircle } from "lucide-react";
 
-import Modal from "../ui/Modal";
-import Backdrop from "../ui/Backdrop";
+import Modal from "../../ui/Modal";
+import Backdrop from "../../ui/Backdrop";
 import { useContext } from "react";
 import StateContext from "@/app/store/state-context";
 

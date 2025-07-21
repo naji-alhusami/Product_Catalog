@@ -1,12 +1,17 @@
 "use client";
+import StateContext from "@/app/store/state-context";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 type BrandFilterProps = {
   brands: string[];
 };
 
 const BrandsFilter = ({ brands }: BrandFilterProps) => {
+  const contextValue = useContext(StateContext);
+  if (!contextValue) return null;
+  const { setSelectedFilters } = contextValue;
+
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -32,7 +37,17 @@ const BrandsFilter = ({ brands }: BrandFilterProps) => {
     params.delete("brand");
     current.forEach((b) => params.append("brand", b));
     router.push(`/keyfobs?${params.toString()}`, { scroll: false });
+    setSelectedFilters((prev) => ({
+      ...prev,
+      brands: Array.from(current),
+    }));
   };
+
+  // useEffect(() => {
+  //   if (setSelectedFilters) {
+  //     setSelectedFilters(selectedBrands);
+  //   }
+  // }, [selectedBrands, setSelectedFilters]);
 
   return (
     <div className="">

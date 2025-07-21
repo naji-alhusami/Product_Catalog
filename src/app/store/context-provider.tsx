@@ -8,14 +8,27 @@ interface ContextProviderProps {
 
 const ContextProvider = ({ children }: ContextProviderProps) => {
   const [isFiltersModal, setIsFiltersModal] = useState<boolean>(false);
+
   function showFiltersModalHandler() {
     setIsFiltersModal(!isFiltersModal);
   }
+
+  const [selectedFilters, setSelectedFilters] = useState<{
+    brands: string[];
+    classes: string[];
+    types: string[];
+  }>({
+    brands: [],
+    classes: [],
+    types: [],
+  });
 
   const value = {
     isFiltersModal,
     setIsFiltersModal,
     showFiltersModalHandler,
+    selectedFilters,
+    setSelectedFilters,
   };
 
   return (
