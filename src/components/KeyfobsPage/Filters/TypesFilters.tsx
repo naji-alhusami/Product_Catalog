@@ -65,7 +65,7 @@ const TypesFilter = ({ Keys }: BrandFilterProps) => {
               onChange={() => handleToggleType(type)}
               className="h-4 w-4"
             />
-            <label htmlFor={type} className="text-sm text-black">
+            <label htmlFor={type} className="text-sm text-black font-semibold">
               Typ {type}
             </label>
             <label

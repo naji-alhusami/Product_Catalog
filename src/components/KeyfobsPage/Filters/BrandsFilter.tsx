@@ -76,7 +76,7 @@ const BrandsFilter = ({ Brands, Keys }: BrandFilterProps) => {
             onChange={() => handleToggleBrand(name)}
             className="h-4 w-4"
           />
-          <label htmlFor={name} className="text-sm text-black">
+          <label htmlFor={name} className="text-sm text-black font-semibold">
             {name}
           </label>
           <label htmlFor={name} className="text-sm text-gray-400 font-semibold">
